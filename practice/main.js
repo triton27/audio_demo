@@ -29,3 +29,15 @@ function loadDogSound(url) {
     };
     request.send();
 }
+
+// 音を再生する
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+const context = new AudioContext();
+
+function playSound(buffer) {
+    const source = context.createBufferSource(); // create a sound source
+    source.buffer = buffer; // tell the source which sound to play
+    source.connect(context.destination); // connect the source now
+    source.start(0); // play the source now
+    // note: on older systems, may have to use deprecated noteOn(time);
+}
